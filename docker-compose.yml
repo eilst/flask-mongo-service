@@ -1,0 +1,22 @@
+version: '3'
+services:
+  flask-app:
+    build: ./flask-app
+    volumes:
+      - ./flask-app:/usr/src/app
+    ports:
+      - 5000:5000
+    depends_on:
+      - mongo
+  mongo:
+    image: mongo
+    ports:
+    - 27017:27017
+    volumes:
+      - ./data:/data/db
+  mongo-express:
+    image: mongo-express
+    ports:
+    - 8081:8081
+    depends_on:
+    - mongo
